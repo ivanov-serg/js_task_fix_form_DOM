@@ -1,21 +1,30 @@
 'use strict';
-'use strict';
 
-const inputs = document.querySelectorAll('input');
+// беремо ВСІ форми на сторінці
+const forms = document.querySelectorAll('form');
 
-inputs.forEach((input) => {
-  const label = document.createElement('label');
+forms.forEach((form) => {
+  // беремо input ТІЛЬКИ всередині конкретної форми
+  const inputs = form.querySelectorAll('input');
 
-  label.classList.add('field-label');
+  inputs.forEach((input) => {
+    // створюємо label
+    const label = document.createElement('label');
 
-  // 2. Прив’язуємо label до input через id
-  label.setAttribute('for', input.id);
+    label.classList.add('field-label');
 
-  const text = input.name.charAt(0).toUpperCase() + input.name.slice(1);
+    // прив’язка через id
+    label.setAttribute('for', input.id);
 
-  label.textContent = text;
+    // текст із name (з великої літери)
+    const text = input.name.charAt(0).toUpperCase() + input.name.slice(1);
 
-  input.placeholder = text;
+    label.textContent = text;
 
-  input.parentElement.prepend(label);
+    // placeholder
+    input.placeholder = text;
+
+    // вставляємо label перед input
+    input.parentElement.prepend(label);
+  });
 });
